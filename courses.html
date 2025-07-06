@@ -2,144 +2,133 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Liste de Courses - Intendants</title>
+  <title>Liste de Courses - Scouts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background-color: #f9f9f9;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    input[type="search"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-    }
-
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      background-color: #e9ecef;
-      text-align: left;
-    }
-
-    .done {
-      background-color: #d4edda;
-      text-decoration: line-through;
-    }
-
-    input[type="checkbox"] {
-      transform: scale(1.2);
-    }
-
-    @media (max-width: 600px) {
-      th:nth-child(3), td:nth-child(3),
-      th:nth-child(4), td:nth-child(4) {
-        display: none; /* cacher les colonnes quantité/unité si petit écran */
-      }
-    }
+    body { font-family: sans-serif; margin: 20px; background: #f4f4f4; }
+    h1, h2 { text-align: center; }
+    .section { background: white; padding: 1rem; margin-bottom: 2rem; border-radius: 10px; box-shadow: 0 0 5px #ccc; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 8px; border-bottom: 1px solid #ccc; }
+    th { background: #f0f0f0; }
+    .done { background-color: #d4edda; text-decoration: line-through; }
+    input[type="checkbox"] { transform: scale(1.2); }
   </style>
 </head>
 <body>
-  <h1>🧺 Liste de Courses - Intendants</h1>
-  <input type="search" id="search" placeholder="Rechercher un produit...">
-  <table id="courses">
-    <thead>
-      <tr>
-        <th>✔️</th>
-        <th>Produit</th>
-        <th>Quantité</th>
-        <th>Unité</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- contenu dynamique -->
-    </tbody>
-  </table>
+  <h1>🛒 Liste de Courses – Intendance Scouts</h1>
+
+  <div id="liste"></div>
 
   <script>
-    const data = [
-      { produit: "Beurre", quantite: 4.00, unite: "kg" },
-      { produit: "Carottes râpées", quantite: 16.00, unite: "kg" },
-      { produit: "Concombre", quantite: 16.00, unite: "kg" },
-      { produit: "Crème fraîche", quantite: 33.60, unite: "L" },
-      { produit: "Céréales", quantite: 30.56, unite: "kg" },
-      { produit: "Fromage", quantite: 32.00, unite: "kg" },
-      { produit: "Fromage râpé", quantite: 12.00, unite: "kg" },
-      { produit: "Gaufres", quantite: 336.00, unite: "unités" },
-      { produit: "Jambon", quantite: 32.00, unite: "kg" },
-      { produit: "Lait", quantite: 184.80, unite: "L" },
-      { produit: "Lardons", quantite: 16.80, unite: "kg" },
-      { produit: "Légumes (salade, tomates, concombre)", quantite: 20.00, unite: "kg" },
-      { produit: "Margarine ou mayo", quantite: 8.00, unite: "kg" },
-      { produit: "Oignons", quantite: 12.00, unite: "kg" },
-      { produit: "Pain (croque)", quantite: 80.00, unite: "paquets" },
-      { produit: "Pain de mie", quantite: 120.00, unite: "paquets" },
-      { produit: "Pitch", quantite: 336.00, unite: "unités" },
-      { produit: "Poulet", quantite: 44.00, unite: "kg" },
-      { produit: "Pâtes", quantite: 33.60, unite: "kg" },
-      { produit: "Salade", quantite: 4.80, unite: "kg" },
-      { produit: "Sauce (yaourt ou mayo/ketchup)", quantite: 8.00, unite: "kg" },
-      { produit: "Wraps", quantite: 672.00, unite: "unités" },
+    const blocs = [
+      {
+        bloc: "Jours 1 à 3",
+        items: [
+          { produit: "Crème fraîche", quantite: 4.2, unite: "L" },
+          { produit: "Céréales", quantite: 2.52, unite: "kg" },
+          { produit: "Lait", quantite: 12.6, unite: "L" },
+          { produit: "Poulet", quantite: 5.5, unite: "kg" },
+          { produit: "Pâtes", quantite: 4.2, unite: "kg" },
+          { produit: "Wraps", quantite: 84, unite: "unités" }
+        ]
+      },
+      {
+        bloc: "Jours 4 à 6",
+        items: [
+          { produit: "Fromage", quantite: 4, unite: "kg" },
+          { produit: "Jambon", quantite: 4, unite: "kg" },
+          { produit: "Lait", quantite: 12.6, unite: "L" },
+          { produit: "Oeufs", quantite: 126, unite: "unités" },
+          { produit: "Pain de mie", quantite: 15, unite: "paquets" },
+          { produit: "Pitch", quantite: 42, unite: "unités" }
+        ]
+      },
+      {
+        bloc: "Jours 7 à 9",
+        items: [
+          { produit: "Fromage râpé", quantite: 1.5, unite: "kg" },
+          { produit: "Gaufres", quantite: 42, unite: "unités" },
+          { produit: "Légumes", quantite: 3, unite: "kg" },
+          { produit: "Pain", quantite: 6, unite: "pains" },
+          { produit: "Poulet", quantite: 6.3, unite: "kg" },
+          { produit: "Riz", quantite: 4.2, unite: "kg" }
+        ]
+      },
+      {
+        bloc: "Jours 10 à 12",
+        items: [
+          { produit: "Camembert", quantite: 2.7, unite: "kg" },
+          { produit: "Feta", quantite: 2, unite: "kg" },
+          { produit: "Lardons", quantite: 2.1, unite: "kg" },
+          { produit: "Oignons", quantite: 2, unite: "kg" },
+          { produit: "Pommes de terre", quantite: 10.5, unite: "kg" },
+          { produit: "Tomates", quantite: 3, unite: "kg" }
+        ]
+      },
+      {
+        bloc: "Jours 13 à 15",
+        items: [
+          { produit: "Bananes", quantite: 10, unite: "kg" },
+          { produit: "Concombre", quantite: 2, unite: "kg" },
+          { produit: "Frites", quantite: 8.4, unite: "kg" },
+          { produit: "Pêches", quantite: 10, unite: "kg" },
+          { produit: "Raviolis", quantite: 8.4, unite: "kg" },
+          { produit: "Thon", quantite: 2.1, unite: "kg" }
+        ]
+      },
+      {
+        bloc: "Jour 16",
+        items: [
+          { produit: "Chocolat", quantite: 0.84, unite: "kg" },
+          { produit: "Pain de mie", quantite: 12, unite: "paquets" }
+        ]
+      }
     ];
 
-    const tbody = document.querySelector("#courses tbody");
-    const searchInput = document.getElementById("search");
+    const container = document.getElementById("liste");
 
-    // Tri alphabétique
-    data.sort((a, b) => a.produit.localeCompare(b.produit));
+    blocs.forEach((bloc, blocIndex) => {
+      const section = document.createElement("div");
+      section.className = "section";
 
-    // Affiche toutes les lignes
-    function displayRows(filter = "") {
-      tbody.innerHTML = "";
-      data.forEach(({ produit, quantite, unite }, i) => {
-        if (produit.toLowerCase().includes(filter.toLowerCase())) {
-          const checked = localStorage.getItem(`chk${i}`) === "true";
-          const row = document.createElement("tr");
-          if (checked) row.classList.add("done");
-          row.innerHTML = `
-            <td><input type="checkbox" id="chk${i}" ${checked ? "checked" : ""}></td>
-            <td>${produit}</td>
-            <td>${quantite.toFixed(2)}</td>
-            <td>${unite}</td>
-          `;
-          tbody.appendChild(row);
-          // Ajout du comportement
-          row.querySelector("input").addEventListener("change", () => {
-            row.classList.toggle("done");
-            localStorage.setItem(`chk${i}`, row.querySelector("input").checked);
-          });
-        }
+      section.innerHTML = `<h2>${bloc.bloc}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>✔️</th>
+              <th>Produit</th>
+              <th>Quantité</th>
+              <th>Unité</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-${blocIndex}"></tbody>
+        </table>`;
+
+      container.appendChild(section);
+
+      const tbody = section.querySelector("tbody");
+
+      bloc.items.forEach((item, itemIndex) => {
+        const id = `b${blocIndex}_i${itemIndex}`;
+        const checked = localStorage.getItem(id) === "true";
+        const row = document.createElement("tr");
+        if (checked) row.classList.add("done");
+        row.innerHTML = `
+          <td><input type="checkbox" id="${id}" ${checked ? "checked" : ""}></td>
+          <td>${item.produit}</td>
+          <td>${item.quantite}</td>
+          <td>${item.unite}</td>
+        `;
+        tbody.appendChild(row);
+
+        row.querySelector("input").addEventListener("change", (e) => {
+          const isChecked = e.target.checked;
+          row.classList.toggle("done", isChecked);
+          localStorage.setItem(id, isChecked);
+        });
       });
-    }
-
-    // Recherche
-    searchInput.addEventListener("input", () => {
-      displayRows(searchInput.value);
     });
-
-    // Initialisation
-    displayRows();
   </script>
 </body>
 </html>
