@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste de Courses - Intendants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    input[type="search"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #e9ecef;
+      text-align: left;
+    }
+
+    .done {
+      background-color: #d4edda;
+      text-decoration: line-through;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 600px) {
+      th:nth-child(3), td:nth-child(3),
+      th:nth-child(4), td:nth-child(4) {
+        display: none; /* cacher les colonnes quantité/unité si petit écran */
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🧺 Liste de Courses - Intendants</h1>
+  <input type="search" id="search" placeholder="Rechercher un produit...">
+  <table id="courses">
+    <thead>
+      <tr>
+        <th>✔️</th>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Unité</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- contenu dynamique -->
+    </tbody>
+  </table>
+
+  <script>
+    const data = [
+      { produit: "Beurre", quantite: 4.00, unite: "kg" },
+      { produit: "Carottes râpées", quantite: 16.00, unite: "kg" },
+      { produit: "Concombre", quantite: 16.00, unite: "kg" },
+      { produit: "Crème fraîche", quantite: 33.60, unite: "L" },
+      { produit: "Céréales", quantite: 30.56, unite: "kg" },
+      { produit: "Fromage", quantite: 32.00, unite: "kg" },
+      { produit: "Fromage râpé", quantite: 12.00, unite: "kg" },
+      { produit: "Gaufres", quantite: 336.00, unite: "unités" },
+      { produit: "Jambon", quantite: 32.00, unite: "kg" },
+      { produit: "Lait", quantite: 184.80, unite: "L" },
+      { produit: "Lardons", quantite: 16.80, unite: "kg" },
+      { produit: "Légumes (salade, tomates, concombre)", quantite: 20.00, unite: "kg" },
+      { produit: "Margarine ou mayo", quantite: 8.00, unite: "kg" },
+      { produit: "Oignons", quantite: 12.00, unite: "kg" },
+      { produit: "Pain (croque)", quantite: 80.00, unite: "paquets" },
+      { produit: "Pain de mie", quantite: 120.00, unite: "paquets" },
+      { produit: "Pitch", quantite: 336.00, unite: "unités" },
+      { produit: "Poulet", quantite: 44.00, unite: "kg" },
+      { produit: "Pâtes", quantite: 33.60, unite: "kg" },
+      { produit: "Salade", quantite: 4.80, unite: "kg" },
+      { produit: "Sauce (yaourt ou mayo/ketchup)", quantite: 8.00, unite: "kg" },
+      { produit: "Wraps", quantite: 672.00, unite: "unités" },
+    ];
+
+    const tbody = document.querySelector("#courses tbody");
+    const searchInput = document.getElementById("search");
+
+    // Tri alphabétique
+    data.sort((a, b) => a.produit.localeCompare(b.produit));
+
+    // Affiche toutes les lignes
+    function displayRows(filter = "") {
+      tbody.innerHTML = "";
+      data.forEach(({ produit, quantite, unite }, i) => {
+        if (produit.toLowerCase().includes(filter.toLowerCase())) {
+          const checked = localStorage.getItem(`chk${i}`) === "true";
+          const row = document.createElement("tr");
+          if (checked) row.classList.add("done");
+          row.innerHTML = `
+            <td><input type="checkbox" id="chk${i}" ${checked ? "checked" : ""}></td>
+            <td>${produit}</td>
+            <td>${quantite.toFixed(2)}</td>
+            <td>${unite}</td>
+          `;
+          tbody.appendChild(row);
+          // Ajout du comportement
+          row.querySelector("input").addEventListener("change", () => {
+            row.classList.toggle("done");
+            localStorage.setItem(`chk${i}`, row.querySelector("input").checked);
+          });
+        }
+      });
+    }
+
+    // Recherche
+    searchInput.addEventListener("input", () => {
+      displayRows(searchInput.value);
+    });
+
+    // Initialisation
+    displayRows();
+  </script>
+</body>
+</html>
