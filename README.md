@@ -34,8 +34,10 @@ Ce repository est organisé autour du programme officiel de l'ECAM. Voici la lis
 ---
 ## Structure Actuelle du Projet
 
+### `Projet_SI/` (Système d'Information)
+Ce dossier contient tous les exercices et travaux en lien avec le projet Système d'Information (3bmsi30) :
 - **Seance_1/** : Requêtes HTTP et Librairies API (Exercices Python ENTSO-E).  
 - **Seance_2/** : Bases de données et Modélisations conceptuelles (Schémas Relationnels et E-R).  
-- **Explications_Cours.md** : Synthèse détaillée de la théorie pour le projet Système d'Information.  
+- **Explications_Cours.md** : Synthèse détaillée de la théorie.  
 
 > *Créé pour les étudiants de l'ECAM.*
