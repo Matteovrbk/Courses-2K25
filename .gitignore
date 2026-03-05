@@ -1,0 +1,19 @@
+# Fichiers sensibles à ne jamais publier
+Cle_API*
+Clé_API*
+*Cle_API*
+
+# PDF d'instructions et énoncés pour éviter de polluer le repo
+*.pdf
+ECAM.pdf
+Enonce*
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Autres
+.env
+.DS_Store
