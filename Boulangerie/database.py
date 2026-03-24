@@ -56,3 +56,19 @@ def delete_machine(db_path, id_machine):
     conn.commit()
     conn.close()
     return 
+
+def get_all_taches(db_path, id_produit):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor() 
+    cursor.execute("SELECT * FROM tache WHERE id_produit = ? ORDER BY ordre", (id_produit,))
+    taches = cursor.fetchall()
+    conn.close()
+    return taches
+
+def get_machine_by_id(db_path, id_machine):
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM machine WHERE id_machine = ?", (id_machine,))
+    machine = cursor.fetchone()
+    conn.close()
+    return machine
