@@ -24,6 +24,15 @@ def add_machine(db_path, nom, puissance, operateur_nom, operateur_mail):
     conn.commit()
     conn.close()
 
+def add_tache(db_path, id_produit, id_machine, ordre, duree_min)
+    conn = sqlite3.connect(db_path)
+    conn.execute(
+        "INSERT INTO tache (id_produit, id_machine, ordre, duree) VALUES (?, ?, ?, ?)",
+        (id_produit, id_machine, ordre, duree_min)
+    )
+    conn.commit()
+    conn.close()    
+
 def add_product(db_path,nom):
     conn = sqlite3.connect(db_path)
     conn.execute(
@@ -72,3 +81,4 @@ def get_machine_by_id(db_path, id_machine):
     machine = cursor.fetchone()
     conn.close()
     return machine
+
