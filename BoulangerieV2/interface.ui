@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Boulangerie ECAM</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+    <item>
+     <widget class="QTabWidget" name="tabWidget_main">
+
+      <!-- ===== ONGLET CONFIGURATION ===== -->
+      <widget class="QWidget" name="Configuration">
+       <attribute name="title">
+        <string>Configuration</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_config">
+
+        <!-- Section Machines -->
+        <item>
+         <widget class="QLabel" name="label_machines">
+          <property name="text">
+           <string>Machines :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_machines">
+          <item>
+           <widget class="QTableWidget" name="tableWidget_machines">
+            <column>
+             <property name="text"><string>ID</string></property>
+            </column>
+            <column>
+             <property name="text"><string>Nom</string></property>
+            </column>
+            <column>
+             <property name="text"><string>Puissance (W)</string></property>
+            </column>
+            <column>
+             <property name="text"><string>Chef</string></property>
+            </column>
+            <column>
+             <property name="text"><string>Email</string></property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_form_machine">
+            <item><widget class="QLabel" name="label_nom"><property name="text"><string>Nom :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_nom"/></item>
+            <item><widget class="QLabel" name="label_puissance"><property name="text"><string>Puissance (W) :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_puissance"/></item>
+            <item><widget class="QLabel" name="label_chef"><property name="text"><string>Chef :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_chef"/></item>
+            <item><widget class="QLabel" name="label_email"><property name="text"><string>Email :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_email"/></item>
+            <item><widget class="QPushButton" name="pushButton_ajouter"><property name="text"><string>Nouvelle machine</string></property></widget></item>
+            <item><widget class="QPushButton" name="pushButton_supprimer_machine"><property name="text"><string>Supprimer machine</string></property></widget></item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+
+        <!-- Section Produits -->
+        <item>
+         <widget class="QLabel" name="label_produits">
+          <property name="text">
+           <string>Produits :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_produits">
+          <item>
+           <widget class="QTableWidget" name="tableWidget_produits">
+            <column>
+             <property name="text"><string>ID</string></property>
+            </column>
+            <column>
+             <property name="text"><string>Nom</string></property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_form_produit">
+            <item><widget class="QLabel" name="label_produit"><property name="text"><string>Produit :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_produit"/></item>
+            <item><widget class="QPushButton" name="pushButton_produit"><property name="text"><string>Nouveau produit</string></property></widget></item>
+            <item><widget class="QPushButton" name="pushButton_supprimer_produit"><property name="text"><string>Supprimer produit</string></property></widget></item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+
+        <!-- Section Tâches -->
+        <item>
+         <widget class="QLabel" name="label_taches">
+          <property name="text">
+           <string>Nouvelle tâche :</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_taches">
+          <item>
+           <layout class="QVBoxLayout">
+            <item><widget class="QLabel"><property name="text"><string>Produit :</string></property></widget></item>
+            <item><widget class="QComboBox" name="comboBox_produit_tache"/></item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout">
+            <item><widget class="QLabel"><property name="text"><string>Machine :</string></property></widget></item>
+            <item><widget class="QComboBox" name="comboBox_machine_tache"/></item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout">
+            <item><widget class="QLabel"><property name="text"><string>Ordre :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_ordre"/></item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout">
+            <item><widget class="QLabel"><property name="text"><string>Durée (min) :</string></property></widget></item>
+            <item><widget class="QLineEdit" name="lineEdit_duree"/></item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_tache">
+            <property name="text"><string>Nouvelle tâche</string></property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+       </layout>
+      </widget>
+
+      <!-- ===== ONGLET COMMANDES ===== -->
+      <widget class="QWidget" name="Commandes">
+       <attribute name="title">
+        <string>Commandes</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_commandes">
+        <item><widget class="QLabel" name="label_produit_cmd"><property name="text"><string>Produit :</string></property></widget></item>
+        <item><widget class="QComboBox" name="comboBox_produits"/></item>
+        <item><widget class="QLabel" name="label_heure"><property name="text"><string>Heure de départ (HH:MM) :</string></property></widget></item>
+        <item><widget class="QLineEdit" name="lineEdit_heure"/></item>
+        <item><widget class="QPushButton" name="pushButton_calculer"><property name="text"><string>Calculer le coût</string></property></widget></item>
+        <item><widget class="QLabel" name="label_resultat"><property name="text"><string>Coût : -</string></property></widget></item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget_commandes">
+          <column><property name="text"><string>ID</string></property></column>
+          <column><property name="text"><string>Date</string></property></column>
+          <column><property name="text"><string>Produit</string></property></column>
+          <column><property name="text"><string>Heure début</string></property></column>
+          <column><property name="text"><string>Heure fin</string></property></column>
+          <column><property name="text"><string>Coût (€)</string></property></column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <!-- ===== ONGLET PRIX ===== -->
+      <widget class="QWidget" name="Prix">
+       <attribute name="title">
+        <string>Prix</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_prix">
+       </layout>
+      </widget>
+
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+</ui>
