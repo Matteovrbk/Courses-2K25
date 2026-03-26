@@ -247,7 +247,10 @@ def calculer_cout():
         op_mail = machine[4]
         heure_tache = current_time.strftime("%H:%M")
         if op_mail and op_mail.strip():
-            send_operator_email(op_mail, op_nom, f"{machine[1]} à {heure_tache} pendant {duree_min} min")
+            try:
+                send_operator_email(op_mail, op_nom, f"{machine[1]} à {heure_tache} pendant {duree_min} min")
+            except Exception:
+                QtWidgets.QMessageBox.warning(window, "Erreur mail", f"Impossible d'envoyer le mail à {op_nom} ({op_mail})")
         current_time += timedelta(minutes=duree_min)
 
     commandes = select_commande("")
@@ -263,6 +266,8 @@ def calculer_cout():
         table_commandes.setItem(row, 3, QtWidgets.QTableWidgetItem(str(c[4])))
         table_commandes.setItem(row, 4, QtWidgets.QTableWidgetItem(str(c[5])))
         table_commandes.setItem(row, 5, QtWidgets.QTableWidgetItem(str(round(c[3], 4))))
+
+
 
 
 bouton_ajouter.clicked.connect(addmachine)

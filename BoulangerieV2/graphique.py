@@ -1,11 +1,10 @@
-from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-from PyQt6 import QtWidgets
+import matplotlib.pyplot as plt
+import io
+from PyQt6 import QtWidgets, QtGui
 
 
 def create_price_chart(prices):
-    fig = Figure(figsize=(10, 5))
-    ax = fig.add_subplot()
+    fig, ax = plt.subplots(figsize=(10, 5))
 
     valeurs = prices.values
     x = range(len(valeurs))
@@ -23,8 +22,17 @@ def create_price_chart(prices):
     ax.tick_params(axis="x", rotation=45)
     fig.tight_layout()
 
-    canvas = FigureCanvas(fig)
-    return canvas
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png")
+    plt.close(fig)
+    buf.seek(0)
+
+    pixmap = QtGui.QPixmap()
+    pixmap.loadFromData(buf.read())
+
+    label = QtWidgets.QLabel()
+    label.setPixmap(pixmap)
+    return label
 
 
 def create_alerte_widget(prices):
